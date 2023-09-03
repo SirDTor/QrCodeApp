@@ -16,5 +16,4 @@
 		CanResize="False">
 	
         <views:MainView />
-	
 </Window>

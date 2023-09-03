@@ -13,8 +13,4 @@
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.LinuxFramebuffer" Version="$(AvaloniaVersion)" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\QrCodeApp.ViewAvalonia\QrCodeApp.ViewAvalonia.csproj" />
-  </ItemGroup>
 </Project>

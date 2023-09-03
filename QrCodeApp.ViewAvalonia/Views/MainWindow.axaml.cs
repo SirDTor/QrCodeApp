@@ -1,4 +1,7 @@
 ﻿using Avalonia.Controls;
+using Avalonia.ReactiveUI;
+using QrCodeApp.ViewAvalonia.ViewModels;
+using ReactiveUI;
 
 namespace QrCodeApp.ViewAvalonia.Views;
 

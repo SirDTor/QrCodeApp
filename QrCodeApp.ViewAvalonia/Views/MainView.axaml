@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:QrCodeApp.ViewAvalonia.ViewModels"
+			 xmlns:qr="clr-namespace:Avalonia.QRCode;assembly=Avalonia.QRCode"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
              x:Class="QrCodeApp.ViewAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -36,16 +37,17 @@
 					BorderThickness="1"
 					CornerRadius="6"
 					BorderBrush="WhiteSmoke">
-				<Image 
+				<!--<Image 
 				   Width="250"
 				   Height="250">
-				</Image>
+				</Image>-->
+				<!--<qr:QRCode Data="https://github.com" />-->
 			</Border>
 			<StackPanel Margin="6"
 						Grid.Row="2">
 				<Label HorizontalAlignment="Center" 
 					   Content="Write text"/>
-				<TextBox Watermark="..."/>
+				<TextBox Text="{Binding QrCodeText}" Watermark="..."/>
 			</StackPanel>
 			<StackPanel Grid.Row="3">
 				<Button Name="createQrCode" 
