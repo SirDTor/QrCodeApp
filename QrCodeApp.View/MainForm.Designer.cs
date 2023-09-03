@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             panel1 = new Panel();
             groupBox1 = new GroupBox();
             qrCodePictureBox = new PictureBox();
@@ -202,6 +203,7 @@
             BackColor = Color.White;
             ClientSize = new Size(268, 505);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(284, 544);
             MinimumSize = new Size(284, 544);

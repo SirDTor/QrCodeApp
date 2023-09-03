@@ -61,12 +61,12 @@ namespace QrCodeApp.View.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        public static System.Drawing.Bitmap QrCodeAppTitle {
+        public static System.Drawing.Icon code_qr_scan_scanner_32x32 {
             get {
-                object obj = ResourceManager.GetObject("QrCodeAppTitle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("code_qr_scan_scanner_32x32", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }
