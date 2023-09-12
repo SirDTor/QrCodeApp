@@ -18,5 +18,6 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
         InitializeComponent();
         this.BindCommand(this.ViewModel, vm => vm.CreateQrCodeCommand, v => v.createQrCode);
         this.BindCommand(this.ViewModel, vm => vm.SaveQrCodeCommand, v => v.saveQrCode);
+        this.BindCommand(this.ViewModel, vm => vm.LoadQrCodeCommand, v => v.loadQrCode);
     }
 }

@@ -24,11 +24,11 @@ public class MainViewModel : ViewModelBase
 
     private Bitmap? _pngQrCode;
 
-    public Interaction<Bitmap?, Unit?> SaveQrCodeInteraction { get; set; }
-
     public ReactiveCommand<Unit, Unit>? CreateQrCodeCommand { get; }
 
     public ReactiveCommand<Unit, Unit> SaveQrCodeCommand { get; }
+
+    public ReactiveCommand<Unit, Unit> LoadQrCodeCommand { get; }
 
     public Bitmap? PngQrCode
     {
@@ -45,11 +45,8 @@ public class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         CreateQrCodeCommand = ReactiveCommand.Create(CreateQrCode);
-        SaveQrCodeInteraction = new Interaction<Bitmap?, Unit?>();
-        SaveQrCodeCommand = ReactiveCommand.CreateFromTask(async () =>
-        {
-            await SaveQrCode();
-        });
+        SaveQrCodeCommand = ReactiveCommand.CreateFromTask(SaveQrCode);
+        LoadQrCodeCommand = ReactiveCommand.CreateFromTask(LoadQrCode);
     }
 
     public void CreateQrCode()
@@ -85,7 +82,15 @@ public class MainViewModel : ViewModelBase
         PngQrCode?.Save(file.Path.AbsolutePath);
     }
 
-    private async Task<IStorageFile?> DoOpenFilePickerAsync()
+    public async Task LoadQrCode()
+    {
+        var file = await DoOpenFilePickerAsync();
+        if (file is null) return;
+        var bitmap = new Bitmap(file.Path.AbsolutePath);
+        PngQrCode = bitmap;
+    }
+
+    private static async Task<IStorageFile?> DoOpenFilePickerAsync()
     {
         // For learning purposes, we opted to directly get the reference
         // for StorageProvider APIs here inside the ViewModel. 
@@ -100,14 +105,23 @@ public class MainViewModel : ViewModelBase
 
         var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
         {
-            Title = "Open Text File",
-            AllowMultiple = false
+            Title = "Open QR Code",
+            AllowMultiple = false,
+            FileTypeFilter = new FilePickerFileType[]
+            {
+                new("ElementsData")
+            {
+                Patterns = new[] { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp" },
+                AppleUniformTypeIdentifiers = new[] { "public.image" } ,
+                MimeTypes = new[] { "image/*" }
+            }
+            }
         });
 
         return files?.Count >= 1 ? files[0] : null;
     }
 
-    private async Task<IStorageFile?> DoSaveFilePickerAsync()
+    private static async Task<IStorageFile?> DoSaveFilePickerAsync()
     {
         // For learning purposes, we opted to directly get the reference
         // for StorageProvider APIs here inside the ViewModel. 
@@ -122,7 +136,7 @@ public class MainViewModel : ViewModelBase
 
         return await provider.SaveFilePickerAsync(new FilePickerSaveOptions()
         {
-            Title = "QR code",
+            Title = "Save QR code",
             DefaultExtension = "png"
         });
     }
