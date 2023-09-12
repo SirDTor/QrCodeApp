@@ -16,49 +16,51 @@ namespace QrCodeApp.ViewAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private string? _qrCodeText;
+    private string? _qrTextBox;
 
     private Bitmap? _pngQrCode;
 
-    public Bitmap? PngQrCode 
-    { 
-        get=> _pngQrCode; 
-        set=> this.RaiseAndSetIfChanged(ref _pngQrCode, value); 
+    public Interaction<Bitmap,Unit?> SaveQrCodeInteraction { get; set; }
+
+    public ReactiveCommand<Unit, Unit>? CreateQrCodeCommand { get; }
+
+    public ReactiveCommand<Unit,Unit> SaveQrCodeCommand { get; }
+
+    public Bitmap? PngQrCode
+    {
+        get => _pngQrCode;
+        set => this.RaiseAndSetIfChanged(ref _pngQrCode, value);
     }
 
-    private string _image;
-
-    public ReactiveCommand<Unit, Unit> CreateQrCodeCommand { get; }
+    public string? QrTextBox
+    {
+        get => _qrTextBox;
+        set => this.RaiseAndSetIfChanged(ref _qrTextBox, value);
+    }
 
     public MainViewModel()
     {
         CreateQrCodeCommand = ReactiveCommand.Create(CreateQrCode);
-    }
+        SaveQrCodeInteraction = new Interaction<Bitmap, Unit?>();
 
-    public string? QrCodeText
-    {
-        get => _qrCodeText;
-        set => _qrCodeText = this.RaiseAndSetIfChanged(ref _qrCodeText, value);
-    }
-    public string Image 
-    { 
-        get => _image; 
-        set => this.RaiseAndSetIfChanged(ref _image, value); 
     }
 
     public void CreateQrCode()
     {
-        QRCodeGenerator qrGenerator = new QRCodeGenerator();
-        QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+        if (QrTextBox != null)
+        {
+            QRCodeGenerator qrGenerator = new();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(QrTextBox, QRCodeGenerator.ECCLevel.M);
 
-        PngByteQRCode qrCodePng = new PngByteQRCode(qrCodeData);
-        byte[] qrCodeImagePng = qrCodePng.GetGraphic(20, new byte[] { 144, 201, 111 }, new byte[] { 118, 126, 152 });
-        PngQrCode = ByteToImage(qrCodeImagePng);
+            PngByteQRCode qrCodePng = new(qrCodeData);
+            byte[] qrCodeImagePng = qrCodePng.GetGraphic(20, new byte[] { 0, 0, 0 }, new byte[] { 255, 255, 255 });
+            PngQrCode = ByteToImage(qrCodeImagePng);
+        }
     }
 
     public static Bitmap ByteToImage(byte[] blob)
     {
-        using (MemoryStream mStream = new MemoryStream())
+        using (MemoryStream mStream = new())
         {
             mStream.Write(blob, 0, blob.Length);
             mStream.Seek(0, SeekOrigin.Begin);

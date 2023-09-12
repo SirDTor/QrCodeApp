@@ -5,9 +5,22 @@
              xmlns:vm="clr-namespace:QrCodeApp.ViewAvalonia.ViewModels"
 			         xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
 
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+             mc:Ignorable="d" d:DesignWidth="262" d:DesignHeight="500"
              x:Class="QrCodeApp.ViewAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
+	<UserControl.Styles>
+		<Style Selector="Border.settingButtonBorder">
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform"  Duration="0:0:0.4" />
+				</Transitions>
+			</Setter>
+			<Setter Property="RenderTransform" Value="none" />
+		</Style>
+		<Style Selector="Border.settingButtonBorder:pointerover">
+			<Setter Property="RenderTransform" Value="rotate(120deg)" />
+		</Style>
+	</UserControl.Styles>
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -29,30 +42,54 @@
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="30"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
+			<Border Grid.Row="0" 
+					Classes="settingButtonBorder"
+					HorizontalAlignment="Left"
+					Width="30">
+				<Button Padding="0"
+						CornerRadius="0"
+						Background="Transparent">
+					<Button.Styles>
+						<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="Transparent" />
+							<!--<Style.Animations>
+							<Animation Duration="0:0:0.5" Easing="SineEaseInOut">
+								<KeyFrame Cue="100%">
+									<Setter Property="RotateTransform.Angle" Value="90"/>
+								</KeyFrame>
+							</Animation>
+						</Style.Animations>-->
+						</Style>
+						<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+							<Style.Animations>
+								<Animation Duration="0:0:0.2" Easing="SineEaseInOut">
+									<KeyFrame Cue="1%">
+										<Setter Property="ScaleTransform.ScaleX" Value="0.9"/>
+										<Setter Property="ScaleTransform.ScaleY" Value="0.9"/>
+									</KeyFrame>
+								</Animation>
+							</Style.Animations>
+						</Style>
+					</Button.Styles>
+					<Image Source="/Assets/settings-50x50.png"/>
+				</Button>
+			</Border>
 			<Border Grid.Row="1"
 					Margin="6"
+					Padding="0"
 					BorderThickness="1"
-					CornerRadius="6"
-					BorderBrush="WhiteSmoke">
-				<Image Source="{Binding PngQrCode}"
-				   Width="250"
-				   Height="250">
-				</Image>
+					CornerRadius="4"
+					BorderBrush="WhiteSmoke"
+					Width="250"
+				    Height="250">
+				<Image Source="{Binding PngQrCode}"/>
 			</Border>
-			<StackPanel Margin="6"
-						Grid.Row="2">
-				<Label HorizontalAlignment="Center"
-					   Content="Write text"/>
-				<TextBox Watermark="..."/>
-			</StackPanel>
-			<StackPanel Grid.Row="3">
-				<Button Name="createQrCode"
-						Margin="0,3,0,0"
-						Content="Create QR code"/>
+			<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+				<TextBox Margin="6" Watermark="Enter text here" Text="{Binding QrTextBox}"/>
+				<Button Name="createQrCode" Margin="0,3,0,0" Content="Create QR code"/>
 				<Button Name="saveQrCode" Margin="0,3,0,0" Content="Save QR code"/>
 				<Button Name="loadQrCode" Margin="0,3,0,0" Content="Load QR code"/>
 				<Button Name="scanQrCode" Margin="0,3,0,3" Content="Scan QR code"/>
@@ -60,6 +97,7 @@
 					<Style Selector="Button">
 						<Setter Property="HorizontalAlignment" Value="Stretch"/>
 						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="CornerRadius" Value="0"/>
 					</Style>
 				</StackPanel.Styles>
 			</StackPanel>
