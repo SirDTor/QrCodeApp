@@ -11,6 +11,10 @@ using Avalonia.Platform;
 using ImageExample.Helpers;
 using System;
 using static System.Net.Mime.MediaTypeNames;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 
 namespace QrCodeApp.ViewAvalonia.ViewModels;
 
@@ -20,11 +24,11 @@ public class MainViewModel : ViewModelBase
 
     private Bitmap? _pngQrCode;
 
-    public Interaction<Bitmap,Unit?> SaveQrCodeInteraction { get; set; }
+    public Interaction<Bitmap?, Unit?> SaveQrCodeInteraction { get; set; }
 
     public ReactiveCommand<Unit, Unit>? CreateQrCodeCommand { get; }
 
-    public ReactiveCommand<Unit,Unit> SaveQrCodeCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveQrCodeCommand { get; }
 
     public Bitmap? PngQrCode
     {
@@ -41,8 +45,11 @@ public class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         CreateQrCodeCommand = ReactiveCommand.Create(CreateQrCode);
-        SaveQrCodeInteraction = new Interaction<Bitmap, Unit?>();
-
+        SaveQrCodeInteraction = new Interaction<Bitmap?, Unit?>();
+        SaveQrCodeCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            await SaveQrCode();
+        });
     }
 
     public void CreateQrCode()
@@ -70,4 +77,53 @@ public class MainViewModel : ViewModelBase
         }
     }
 
+    public async Task SaveQrCode()
+    {
+        if (PngQrCode == null) return;
+        var file = await DoSaveFilePickerAsync();
+        if (file is null) return;
+        PngQrCode?.Save(file.Path.AbsolutePath);
+    }
+
+    private async Task<IStorageFile?> DoOpenFilePickerAsync()
+    {
+        // For learning purposes, we opted to directly get the reference
+        // for StorageProvider APIs here inside the ViewModel. 
+
+        // For your real-world apps, you should follow the MVVM principles
+        // by making service classes and locating them with DI/IoC.
+
+        // See IoCFileOps project for an example of how to accomplish this.
+        if (Avalonia.Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+            desktop.MainWindow?.StorageProvider is not { } provider)
+            throw new NullReferenceException("Missing StorageProvider instance.");
+
+        var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = "Open Text File",
+            AllowMultiple = false
+        });
+
+        return files?.Count >= 1 ? files[0] : null;
+    }
+
+    private async Task<IStorageFile?> DoSaveFilePickerAsync()
+    {
+        // For learning purposes, we opted to directly get the reference
+        // for StorageProvider APIs here inside the ViewModel. 
+
+        // For your real-world apps, you should follow the MVVM principles
+        // by making service classes and locating them with DI/IoC.
+
+        // See DepInject project for a sample of how to accomplish this.
+        if (Avalonia.Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+            desktop.MainWindow?.StorageProvider is not { } provider)
+            throw new NullReferenceException("Missing StorageProvider instance.");
+
+        return await provider.SaveFilePickerAsync(new FilePickerSaveOptions()
+        {
+            Title = "QR code",
+            DefaultExtension = "png"
+        });
+    }
 }
