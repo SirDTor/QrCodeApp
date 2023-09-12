@@ -3,14 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:QrCodeApp.ViewAvalonia.ViewModels"
+			         xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
              x:Class="QrCodeApp.ViewAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
 	<Panel>
 		<ExperimentalAcrylicBorder IsHitTestVisible="False">
 			<ExperimentalAcrylicBorder.Material>
@@ -36,20 +38,20 @@
 					BorderThickness="1"
 					CornerRadius="6"
 					BorderBrush="WhiteSmoke">
-				<Image 
+				<Image Source="{Binding PngQrCode}"
 				   Width="250"
 				   Height="250">
 				</Image>
 			</Border>
 			<StackPanel Margin="6"
 						Grid.Row="2">
-				<Label HorizontalAlignment="Center" 
+				<Label HorizontalAlignment="Center"
 					   Content="Write text"/>
 				<TextBox Watermark="..."/>
 			</StackPanel>
 			<StackPanel Grid.Row="3">
-				<Button Name="createQrCode" 
-						Margin="0,3,0,0" 
+				<Button Name="createQrCode"
+						Margin="0,3,0,0"
 						Content="Create QR code"/>
 				<Button Name="saveQrCode" Margin="0,3,0,0" Content="Save QR code"/>
 				<Button Name="loadQrCode" Margin="0,3,0,0" Content="Load QR code"/>
