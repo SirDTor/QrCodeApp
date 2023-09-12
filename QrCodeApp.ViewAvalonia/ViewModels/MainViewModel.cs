@@ -109,7 +109,7 @@ public class MainViewModel : ViewModelBase
             AllowMultiple = false,
             FileTypeFilter = new FilePickerFileType[]
             {
-                new("ElementsData")
+                new("Image")
             {
                 Patterns = new[] { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp" },
                 AppleUniformTypeIdentifiers = new[] { "public.image" } ,

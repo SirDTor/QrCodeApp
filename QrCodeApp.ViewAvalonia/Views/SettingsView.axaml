@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
+             x:Class="QrCodeApp.ViewAvalonia.Views.SettingsView">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<WrapPanel Grid.Column="0"
+				   Grid.Row="0">
+			<Label Content="Qr background color"/>
+			
+		</WrapPanel>
+		<WrapPanel Grid.Column="0"
+				   Grid.Row="1">
+			<Label Content="Qr color"/>
+		</WrapPanel>
+		<WrapPanel Grid.Column="0"
+				   Grid.Row="2">
+			<Label Content="Image into Qr"/>
+		</WrapPanel>
+		<WrapPanel Grid.Column="0"
+				   Grid.Row="3">
+			<Button/>
+			<Button/>
+		</WrapPanel>
+	</Grid>
+</UserControl>
