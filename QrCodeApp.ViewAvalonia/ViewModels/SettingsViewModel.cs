@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QrCodeApp.ViewAvalonia.ViewModels
 {
-    internal class SettingsViewModel
+    public class SettingsViewModel
     {
     }
 }

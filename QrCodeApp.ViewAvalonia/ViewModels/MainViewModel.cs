@@ -30,6 +30,8 @@ public class MainViewModel : ViewModelBase
 
     public ReactiveCommand<Unit, Unit> LoadQrCodeCommand { get; }
 
+
+
     public Bitmap? PngQrCode
     {
         get => _pngQrCode;
@@ -44,6 +46,7 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+       
         CreateQrCodeCommand = ReactiveCommand.Create(CreateQrCode);
         SaveQrCodeCommand = ReactiveCommand.CreateFromTask(SaveQrCode);
         LoadQrCodeCommand = ReactiveCommand.CreateFromTask(LoadQrCode);

@@ -1,10 +1,15 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="QrCodeApp.ViewAvalonia.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+             RequestedThemeVariant="Dark">
     <Application.Styles>
-        <FluentTheme />
+		<FluentTheme>
+			<FluentTheme.Palettes>
+				<ColorPaletteResources x:Key="Light" Accent="#ffca5010" AltHigh="White" AltLow="White" AltMedium="White" AltMediumHigh="White" AltMediumLow="White" BaseHigh="Black" BaseLow="#68c47574" BaseMedium="#c391383d" BaseMediumHigh="#ff6f0f19" BaseMediumLow="#e180232b" ChromeAltLow="#ff6f0f19" ChromeBlackHigh="Black" ChromeBlackLow="#68c47574" ChromeBlackMedium="#ff6f0f19" ChromeBlackMediumLow="#c391383d" ChromeDisabledHigh="#68c47574" ChromeDisabledLow="#c391383d" ChromeGray="#e180232b" ChromeHigh="#68c47574" ChromeLow="#fff5c8c8" ChromeMedium="#e1ebb7b7" ChromeMediumLow="#fff5c8c8" ChromeWhite="White" ListLow="#e1ebb7b7" ListMedium="#68c47574" RegionColor="White" />
+				<ColorPaletteResources x:Key="Dark" Accent="#ff8961cc" AltHigh="Black" AltLow="Black" AltMedium="Black" AltMediumHigh="Black" AltMediumLow="Black" BaseHigh="White" BaseLow="#ff64576b" BaseMedium="#ffb6aabc" BaseMediumHigh="#ffcbbfd0" BaseMediumLow="#ff8d8193" ChromeAltLow="#ffcbbfd0" ChromeBlackHigh="Black" ChromeBlackLow="#ffcbbfd0" ChromeBlackMedium="Black" ChromeBlackMediumLow="Black" ChromeDisabledHigh="#ff64576b" ChromeDisabledLow="#ffb6aabc" ChromeGray="#ffa295a8" ChromeHigh="#ffa295a8" ChromeLow="#ff332041" ChromeMedium="#ff3f2e4b" ChromeMediumLow="#ff584960" ChromeWhite="White" ListLow="#ff3f2e4b" ListMedium="#ff64576b" RegionColor="#ff262738" />
+			</FluentTheme.Palettes>
+		</FluentTheme>
+		<StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml"/>
+		<StyleInclude Source="/Assets/Styles.axaml"/>
     </Application.Styles>
 </Application>
