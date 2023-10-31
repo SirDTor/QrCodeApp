@@ -13,6 +13,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {
+        DataContext = new MainWindowViewModel();
         InitializeComponent();
         this.BindCommand(this.ViewModel, vm => vm.OpenSettingsButton, v => v.SettingsButton);
         this.WhenActivated(action =>

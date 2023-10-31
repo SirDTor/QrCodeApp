@@ -1,38 +1,72 @@
 <Window xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="600"
-             x:Class="QrCodeApp.ViewAvalonia.Views.SettingsView">
-	<Grid>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:QrCodeApp.ViewAvalonia.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
+        x:Class="QrCodeApp.ViewAvalonia.Views.SettingsView"
+		Width="300"
+		MinWidth="240"
+		Height="200"
+		MinHeight="170"
+		Title="Settings"
+		x:DataType="vm:SettingsViewModel"
+		ExtendClientAreaToDecorationsHint="False">
+	<Grid ShowGridLines="False">
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<WrapPanel Grid.Column="0"
-				   Grid.Row="0">
-			<Label Content="Qr background color"/>
-			<ColorPicker />
-		</WrapPanel>
-		<WrapPanel Grid.Column="0"
-				   Grid.Row="1">
-			<Label Content="Qr color"/>
-			<ColorPicker />
-		</WrapPanel>
-		<WrapPanel Grid.Column="0"
-				   Grid.Row="2">
-			<Label Content="Image into Qr"/>
-		</WrapPanel>
-		<WrapPanel Grid.Column="0"
-				   Grid.Row="3">
-			<Button Content="Ok"/>
-			<Button Content="Cancel"/>
-			
-		</WrapPanel>
+		<Border Grid.Column="1"
+				Grid.Row="0"
+				Classes="SettingsPanel">
+			<Grid ColumnDefinitions="Auto,*,Auto" ShowGridLines="False">
+				<Label Grid.Column="1" 
+					   Content="{Binding QrChangeColorText}" 
+					   VerticalAlignment="Center"/>
+				<ColorPicker Grid.Column="2"
+							 Color="{Binding QrColor}"/>
+			</Grid>
+		</Border>
+		<Border Grid.Column="1"
+				   Grid.Row="1"
+				   Classes="SettingsPanel">
+			<Grid ColumnDefinitions="Auto,*,Auto" ShowGridLines="False">
+				<Label Grid.Column="1" 
+					   Content="Qr color" 
+					   VerticalAlignment="Center"/>
+				<ColorPicker Grid.Column="2"
+							 Color="{Binding QrBackColor}"/>
+			</Grid>
+		</Border>
+		<Border Grid.Column="1"
+				Grid.Row="2"
+				Classes="SettingsPanel">
+			<Grid ColumnDefinitions="Auto,*,Auto" ShowGridLines="False">
+				<Label Grid.Column="1" 
+					   Content="Image into Qr" 
+					   VerticalAlignment="Center"/>
+				<Button Grid.Column="2" Content="Load image"/>
+			</Grid>
+		</Border>
+		<Border Grid.Column="1"
+				   Grid.Row="3"
+				   VerticalAlignment="Bottom">
+			<Grid ColumnDefinitions="Auto,*,*,Auto" ShowGridLines="False">
+				<Button Grid.Column="1" 
+						Content="Ok" 
+						Margin="0,0,3,0"/>
+				<Button Grid.Column="2" 
+						Content="Cancel" 
+						Margin="0,0,0,0"/>
+			</Grid>
+		</Border>
 	</Grid>
 </Window>

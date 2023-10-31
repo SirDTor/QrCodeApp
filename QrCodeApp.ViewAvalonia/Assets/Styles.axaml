@@ -8,7 +8,7 @@
 	<Style Selector="Button">
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="CornerRadius" Value="0"/>
+		<Setter Property="CornerRadius" Value="3"/>
 	</Style>
 	<Style Selector="Button.h1">
 		<Setter Property="Padding" Value="0"/>
@@ -27,5 +27,8 @@
 				</Animation>
 			</Style.Animations>
 		</Style>
+	</Style>
+	<Style Selector="Border.SettingsPanel">
+		<Setter Property="Margin" Value="6"/>
 	</Style>
 </Styles>
