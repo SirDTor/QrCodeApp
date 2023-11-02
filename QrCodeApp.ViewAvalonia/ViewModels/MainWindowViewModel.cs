@@ -122,5 +122,6 @@ namespace QrCodeApp.ViewAvalonia.ViewModels
                 DefaultExtension = "png"
             });
         }
+        public void ScanQR() { }
     }
 }
