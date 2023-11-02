@@ -3,17 +3,52 @@
         xmlns:vm="using:QrCodeApp.ViewAvalonia.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
         xmlns:views="clr-namespace:QrCodeApp.ViewAvalonia.Views"
-        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="262" d:DesignHeight="470"
         x:Class="QrCodeApp.ViewAvalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="QrCodeApp.ViewAvalonia"
-		Width="300"
-		Height="500"
+        Title="QrCodeApp"
+		Width="262"
+		Height="470"
+		WindowStartupLocation="CenterScreen"
 		TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
 		ExtendClientAreaToDecorationsHint="True"
 		CanResize="False">
-	
-        <views:MainView />
+	<Window.Styles>
+		<Style Selector="Border.settingButtonBorder">
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform"  Duration="0:0:0.4" />
+				</Transitions>
+			</Setter>
+			<Setter Property="RenderTransform" Value="none" />
+		</Style>
+		<Style Selector="Border.settingButtonBorder:pointerover">
+			<Setter Property="RenderTransform" Value="rotate(120deg)" />
+		</Style>
+	</Window.Styles>
+	<Panel>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="0.5"
+					MaterialOpacity="0.9" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<StackPanel>
+			<Border Grid.Row="0"
+				Classes="settingButtonBorder"
+				HorizontalAlignment="Left"
+				Width="30">
+				<Button Name="SettingsButton" Classes="h1">
+					<Image Source="/Assets/settings-50x50.png"/>
+				</Button>
+			</Border>
+			<views:MainView/>
+		</StackPanel>
+	</Panel>
 </Window>

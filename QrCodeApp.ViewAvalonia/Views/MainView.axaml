@@ -3,66 +3,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:QrCodeApp.ViewAvalonia.ViewModels"
-			 xmlns:qr="clr-namespace:Avalonia.QRCode;assembly=Avalonia.QRCode"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="500"
+             mc:Ignorable="d" d:DesignWidth="262" d:DesignHeight="500"
              x:Class="QrCodeApp.ViewAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
-	<Panel>
-		<ExperimentalAcrylicBorder IsHitTestVisible="False">
-			<ExperimentalAcrylicBorder.Material>
-				<ExperimentalAcrylicMaterial
-					BackgroundSource="Digger"
-					TintColor="Black"
-					TintOpacity="1"
-					MaterialOpacity="0.65" />
-			</ExperimentalAcrylicBorder.Material>
-		</ExperimentalAcrylicBorder>
-		<Grid ShowGridLines="False">
-			<Grid.ColumnDefinitions>
+	<UserControl.Styles>
+		<Style Selector="Border.settingButtonBorder">
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform"  Duration="0:0:0.4" />
+				</Transitions>
+			</Setter>
+			<Setter Property="RenderTransform" Value="none" />
+		</Style>
+		<Style Selector="Border.settingButtonBorder:pointerover">
+			<Setter Property="RenderTransform" Value="rotate(120deg)" />
+		</Style>
+	</UserControl.Styles>
+	<Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
+	<Grid ShowGridLines="False">
+		<Grid.ColumnDefinitions>
 
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Border Grid.Row="1"
-					Margin="6"
-					BorderThickness="1"
-					CornerRadius="6"
-					BorderBrush="WhiteSmoke">
-				<!--<Image 
-				   Width="250"
-				   Height="250">
-				</Image>-->
-				<!--<qr:QRCode Data="https://github.com" />-->
-			</Border>
-			<StackPanel Margin="6"
-						Grid.Row="2">
-				<Label HorizontalAlignment="Center" 
-					   Content="Write text"/>
-				<TextBox Text="{Binding QrCodeText}" Watermark="..."/>
-			</StackPanel>
-			<StackPanel Grid.Row="3">
-				<Button Name="createQrCode" 
-						Margin="0,3,0,0" 
-						Content="Create QR code"/>
-				<Button Name="saveQrCode" Margin="0,3,0,0" Content="Save QR code"/>
-				<Button Name="loadQrCode" Margin="0,3,0,0" Content="Load QR code"/>
-				<Button Name="scanQrCode" Margin="0,3,0,3" Content="Scan QR code"/>
-				<StackPanel.Styles>
-					<Style Selector="Button">
-						<Setter Property="HorizontalAlignment" Value="Stretch"/>
-						<Setter Property="HorizontalContentAlignment" Value="Center"/>
-					</Style>
-				</StackPanel.Styles>
-			</StackPanel>
-		</Grid>
-	</Panel>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Border Grid.Row="1"
+				Margin="6"
+				Padding="0"
+				BorderThickness="1"
+				CornerRadius="4"
+				BorderBrush="WhiteSmoke"
+				Width="250"
+				Height="250">
+			<Image Source="{Binding PngQrCode}"/>
+		</Border>
+		<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+			<TextBox Margin="6" Watermark="Enter text here" Text="{Binding QrTextBox}"/>
+			<Button Name="createQrCode" Margin="0,3,0,0" Content="Create QR code"/>
+			<Button Name="saveQrCode" Margin="0,3,0,0" Content="Save QR code"/>
+			<Button Name="loadQrCode" Margin="0,3,0,0" Content="Load QR code"/>
+			<Button IsEnabled="False" Name="scanQrCode" Margin="0,3,0,3" Content="Scan QR code"/>
+		</StackPanel>
+	</Grid>
 </UserControl>
