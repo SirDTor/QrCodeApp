@@ -4,7 +4,6 @@ using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 
-
 namespace QrCodeApp.ViewAvalonia.ViewModels;
 
 public abstract class MainViewModel : ViewModelBase

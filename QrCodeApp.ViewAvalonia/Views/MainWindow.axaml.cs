@@ -7,7 +7,6 @@ using ReactiveUI;
 using System.Reactive;
 using System.Threading.Tasks;
 
-
 namespace QrCodeApp.ViewAvalonia.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
