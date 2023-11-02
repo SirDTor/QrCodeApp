@@ -39,7 +39,7 @@ namespace QrCodeApp.ViewAvalonia.ViewModels
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(QrTextBox, QRCodeGenerator.ECCLevel.M);
 
                 PngByteQRCode qrCodePng = new(qrCodeData);
-                byte[] qrCodeImagePng = qrCodePng.GetGraphic(20, new byte[] { 0, 0, 0 }, new byte[] { 255, 255, 255});
+                byte[] qrCodeImagePng = qrCodePng.GetGraphic(20, QrByteColor, QrByteBackColor);
                 PngQrCode = ByteToImage(qrCodeImagePng);
             }
         }

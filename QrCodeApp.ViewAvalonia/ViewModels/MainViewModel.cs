@@ -12,6 +12,9 @@ public abstract class MainViewModel : ViewModelBase
 
     private Bitmap? _pngQrCode;
 
+    private byte[] _qrByteBackColor = new byte[4] { 255, 255, 255, 255 };
+    private byte[] _qrByteColor = new byte[4] { 0,0,0,0 };
+
     public ReactiveCommand<Unit, Unit>? CreateQrCodeCommand { get; }
 
     public ReactiveCommand<Unit, Unit> SaveQrCodeCommand { get; }
@@ -29,6 +32,10 @@ public abstract class MainViewModel : ViewModelBase
         get => _qrTextBox;
         set => this.RaiseAndSetIfChanged(ref _qrTextBox, value);
     }
+
+    public byte[] QrByteBackColor { get => _qrByteBackColor; set => this.RaiseAndSetIfChanged(ref _qrByteBackColor, value); }
+
+    public byte[] QrByteColor { get => _qrByteColor; set => this.RaiseAndSetIfChanged(ref _qrByteColor, value); }
 
     public MainViewModel()
     {

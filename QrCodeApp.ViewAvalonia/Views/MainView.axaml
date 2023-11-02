@@ -46,7 +46,7 @@
 			<Button Name="createQrCode" Margin="0,3,0,0" Content="Create QR code"/>
 			<Button Name="saveQrCode" Margin="0,3,0,0" Content="Save QR code"/>
 			<Button Name="loadQrCode" Margin="0,3,0,0" Content="Load QR code"/>
-			<Button Name="scanQrCode" Margin="0,3,0,3" Content="Scan QR code"/>
+			<Button IsEnabled="False" Name="scanQrCode" Margin="0,3,0,3" Content="Scan QR code"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

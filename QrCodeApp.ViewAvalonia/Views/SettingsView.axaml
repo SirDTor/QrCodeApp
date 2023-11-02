@@ -9,6 +9,7 @@
 		MinWidth="240"
 		Height="200"
 		MinHeight="170"
+		WindowStartupLocation="CenterScreen"
 		Title="Settings"
 		x:DataType="vm:SettingsViewModel"
 		ExtendClientAreaToDecorationsHint="False">
@@ -40,7 +41,7 @@
 				   Classes="SettingsPanel">
 			<Grid ColumnDefinitions="Auto,*,Auto" ShowGridLines="False">
 				<Label Grid.Column="1" 
-					   Content="Qr color" 
+					   Content="{Binding QrChangeBackColorText}" 
 					   VerticalAlignment="Center"/>
 				<ColorPicker Grid.Column="2"
 							 Color="{Binding QrBackColor}"/>
@@ -48,10 +49,10 @@
 		</Border>
 		<Border Grid.Column="1"
 				Grid.Row="2"
-				Classes="SettingsPanel">
+				Classes="SettingsPanel" IsEnabled="False">
 			<Grid ColumnDefinitions="Auto,*,Auto" ShowGridLines="False">
 				<Label Grid.Column="1" 
-					   Content="Image into Qr" 
+					   Content="{Binding InQrImage}" 
 					   VerticalAlignment="Center"/>
 				<Button Grid.Column="2" Content="Load image"/>
 			</Grid>
@@ -61,10 +62,12 @@
 				   VerticalAlignment="Bottom">
 			<Grid ColumnDefinitions="Auto,*,*,Auto" ShowGridLines="False">
 				<Button Grid.Column="1" 
-						Content="Ok" 
+						Content="Ok"
+						Click="OkButton_Clicked"
 						Margin="0,0,3,0"/>
 				<Button Grid.Column="2" 
 						Content="Cancel" 
+						Click="CancelButton_Clicked"
 						Margin="0,0,0,0"/>
 			</Grid>
 		</Border>

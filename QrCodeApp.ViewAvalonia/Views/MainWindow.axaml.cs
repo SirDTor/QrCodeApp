@@ -21,7 +21,8 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     }
     private async Task DoShowDialogAsync(InteractionContext<SettingsViewModel, MainViewModel?> interaction)
     {
-        var dialog = new SettingsView
+        var data = this.DataContext as MainWindowViewModel;
+        var dialog = new SettingsView(data)
         {
             DataContext = interaction.Input
         };
