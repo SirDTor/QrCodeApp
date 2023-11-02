@@ -44,18 +44,18 @@ namespace QrCodeApp.ViewAvalonia.ViewModels
 
         public async void ChangeQrColor(Color QrColor)
         {
-            QrByteBackColor[0] = QrColor.R;
-            QrByteBackColor[1] = QrColor.G;
-            QrByteBackColor[2] = QrColor.B;
-            QrByteBackColor[3] = QrColor.A;
+            QrByteColor[0] = QrColor.R;
+            QrByteColor[1] = QrColor.G;
+            QrByteColor[2] = QrColor.B;
+            QrByteColor[3] = QrColor.A;
         }
 
         public async void ChangeQrBackColor(Color QrBackColor)
         {
-            QrByteColor[0] = QrBackColor.R;
-            QrByteColor[1] = QrBackColor.G;
-            QrByteColor[2] = QrBackColor.B;
-            QrByteColor[3] = QrBackColor.A;
+            QrByteBackColor[0] = QrBackColor.R;
+            QrByteBackColor[1] = QrBackColor.G;
+            QrByteBackColor[2] = QrBackColor.B;
+            QrByteBackColor[3] = QrBackColor.A;
         }
     }
 }
