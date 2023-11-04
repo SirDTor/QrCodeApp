@@ -19,15 +19,25 @@ namespace QrCodeApp.ViewAvalonia.ViewModels
     {
         public ReactiveCommand<Unit, Unit> OpenSettingsButton { get; }
 
+        public ReactiveCommand<Unit, Unit> OpenAboutWindowButton { get; }
+
         public Interaction<SettingsViewModel, MainViewModel?> OpenSettingsInteraction { get; }
+
+        public Interaction<AboutWindowViewModel,MainViewModel?> OpenAboutWindowInteraction { get; }
 
         public MainWindowViewModel() 
         {  
             OpenSettingsInteraction = new Interaction<SettingsViewModel, MainViewModel?>();
+            OpenAboutWindowInteraction = new Interaction<AboutWindowViewModel, MainViewModel?>();
             OpenSettingsButton = ReactiveCommand.CreateFromTask(async () =>
             {
                 var settingsViewModel = new SettingsViewModel();
                 var resultOpenSettings = await OpenSettingsInteraction.Handle(settingsViewModel);
+            });
+            OpenAboutWindowButton = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var aboutViewModel = new AboutWindowViewModel();
+                var resultOpenAboutWindow = await OpenAboutWindowInteraction.Handle(aboutViewModel);
             });
         }
 

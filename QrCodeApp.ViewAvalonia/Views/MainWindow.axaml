@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:QrCodeApp.ViewAvalonia.Views"
         mc:Ignorable="d" d:DesignWidth="262" d:DesignHeight="470"
         x:Class="QrCodeApp.ViewAvalonia.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/transparent-qr-code-64x64.ico"
         Title="QrCodeApp"
 		Width="262"
 		Height="470"
@@ -28,6 +28,17 @@
 		<Style Selector="Border.settingButtonBorder:pointerover">
 			<Setter Property="RenderTransform" Value="rotate(120deg)" />
 		</Style>
+		<Style Selector="Border.infoButtonBorder">
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform"  Duration="0:0:0.1" />
+				</Transitions>
+			</Setter>
+			<Setter Property="RenderTransform" Value="none" />
+		</Style>
+		<Style Selector="Border.infoButtonBorder:pointerover">
+			<Setter Property="RenderTransform" Value="scale(0.9,0.9)" />
+		</Style>
 	</Window.Styles>
 	<Panel>
 		<ExperimentalAcrylicBorder IsHitTestVisible="False">
@@ -39,7 +50,7 @@
 					MaterialOpacity="0.9" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<StackPanel>
+		<WrapPanel>
 			<Border Grid.Row="0"
 				Classes="settingButtonBorder"
 				HorizontalAlignment="Left"
@@ -48,7 +59,15 @@
 					<Image Source="/Assets/settings-50x50.png"/>
 				</Button>
 			</Border>
+			<Border Grid.Row="0"
+				Classes="infoButtonBorder"
+				HorizontalAlignment="Left"
+				Width="28">
+				<Button Name="AboutButton" Classes="h1">
+					<Image Source="/Assets/info-64x64.png"/>
+				</Button>
+			</Border>
 			<views:MainView/>
-		</StackPanel>
+		</WrapPanel>
 	</Panel>
 </Window>
